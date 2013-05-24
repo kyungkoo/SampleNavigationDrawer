@@ -58,6 +58,11 @@ public class MainActivity extends SherlockFragmentActivity implements
 	protected void onPostCreate(Bundle savedInstanceState) {
 
 		super.onPostCreate(savedInstanceState);
+
+		// syncState() method should be called onPostCreate.
+		// for more details, see Android Developer Site
+		// http://developer.android.com/reference/android/support/v4/app/ActionBarDrawerToggle.html#syncState()
+
 		mDrawerToggle.syncState();
 	}
 
@@ -71,6 +76,12 @@ public class MainActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+
+		// ActionBarDrawerToggle's onOptionsItemSelected() method doesn't work
+		// in AcionBarSherlock yet.
+		// so, I changed this method like this.
+		// Check android.R.id.home
+		// toggle DrawerLayout
 
 		if (item.getItemId() == android.R.id.home) {
 
@@ -92,7 +103,6 @@ public class MainActivity extends SherlockFragmentActivity implements
 
 			super(activity, drawerLayout, drawerImageRes,
 					openDrawerContentDescRes, closeDrawerContentDescRes);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
